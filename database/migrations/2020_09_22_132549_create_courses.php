@@ -16,7 +16,7 @@ class CreateCourses extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('sertificate');
+            $table->boolean('certificate');
             $table->string('thumbnail')->nullable();
             $table->enum('type', ['free','premium']);
             $table->enum('status', ['draft','published']);
