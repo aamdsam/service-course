@@ -24,3 +24,5 @@ Route::get('course', 'CourseController@index');
 Route::post('course', 'CourseController@create');
 Route::put('course/{id}', 'CourseController@update');
 Route::delete('course/{id}', 'CourseController@destroy');
+
+Route::post('chapters', 'ChapterController@create');
