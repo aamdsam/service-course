@@ -9,28 +9,33 @@ use Illuminate\Support\Facades\Validator;
 
 class ChapterController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $mentors = Chapter::all();
+        $chapters = Chapter::query();
+        $courseId = $request->query('course_id');
+
+        $chapters->when($courseId, function ($query) use ($courseId) {
+            return $query->where('course_id', '=', $courseId);
+        });
         return response()->json([
             'status' => 'success',
-            'data' => $mentors
+            'data' => $chapters->get()
         ]);
     }
 
     public function show($id)
     {
-        $mentor = Chapter::find($id);
-        if (!$mentor) {
+        $chapter = Chapter::find($id);
+        if (!$chapter) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Mentor Not Found'
+                'message' => 'chapters Not Found'
             ]);
         }
 
         return response()->json([
             'status' => 'success',
-            'data' => $mentor
+            'data' => $chapter
         ]);
     }
 
@@ -70,9 +75,7 @@ class ChapterController extends Controller
     {
         $rules = [
             'name' => 'string',
-            'profile' => 'url',
-            'profession' => 'string',
-            'email' => 'email'
+            'course_id' => 'integer'
         ];
 
         $data = $request->all();
@@ -86,35 +89,46 @@ class ChapterController extends Controller
             ], 400);
         }
 
-        $mentor = Chapter::find($id);
-        if (!$mentor) {
+        $chapter = Chapter::find($id);
+        if (!$chapter) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'mentor not found',
+                'message' => 'chapter not found',
             ], 404);
         }
 
-        $mentor->fill($data);
+        $courseId = $request->input('course_id');
+        if ($courseId){
+            $course = Course::find($courseId);
+            if (!$course) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'course not found',
+                ], 404);
+            }
+        }
 
-        $mentor->save();
-        return response()->json(['status' => 'success', 'data' => $mentor]);
+        $chapter->fill($data);
+
+        $chapter->save();
+        return response()->json(['status' => 'success', 'data' => $chapter]);
     }
 
     public function destroy($id)
     {
-        $mentor = Chapter::find($id);
-        if (!$mentor) {
+        $chapter = Chapter::find($id);
+        if (!$chapter) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Mentor Not Found'
+                'message' => 'chapter Not Found'
             ]);
         }
 
-        $mentor->delete();
+        $chapter->delete();
 
         return response()->json([
             'status' => 'success',
-            'data' => $mentor
+            'data' => $chapter
         ]);
     }
 }

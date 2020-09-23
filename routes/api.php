@@ -26,3 +26,7 @@ Route::put('course/{id}', 'CourseController@update');
 Route::delete('course/{id}', 'CourseController@destroy');
 
 Route::post('chapters', 'ChapterController@create');
+Route::put('chapters/{id}', 'ChapterController@update');
+Route::get('chapters', 'ChapterController@index');
+Route::get('chapters/{id}', 'ChapterController@show');
+Route::delete('chapters/{id}', 'ChapterController@destroy');
