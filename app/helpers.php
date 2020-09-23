@@ -6,6 +6,9 @@ function getUser($userId){
 
     try {
         $response = Http::timeout(10)->get($url);
+        $data = $response->json();
+        $data['http_code'] = $response->getStatusCode();
+        return $data;
     } catch (\Throwable $th) {
         return [
             'status' => 'error',

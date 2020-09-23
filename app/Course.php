@@ -20,7 +20,7 @@ class Course extends Model
 
     public function mentor()
     {
-        return $this->belongTo('App\Mentor');
+        return $this->belongsTo('App\Mentor');
     }
 
     public function chapters()
