@@ -36,3 +36,9 @@ Route::put('lessons/{id}', 'LessonController@update');
 Route::get('lessons', 'LessonController@index');
 Route::get('lessons/{id}', 'LessonController@show');
 Route::delete('lessons/{id}', 'LessonController@destroy');
+
+Route::post('image-courses', 'ImageCourseController@create');
+Route::put('image-courses/{id}', 'ImageCourseController@update');
+Route::get('image-courses', 'ImageCourseController@index');
+Route::get('image-courses/{id}', 'ImageCourseController@show');
+Route::delete('image-courses/{id}', 'ImageCourseController@destroy');
