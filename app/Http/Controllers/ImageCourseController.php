@@ -30,7 +30,7 @@ class ImageCourseController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'imageCourse Not Found'
-            ]);
+            ], 404);
         }
 
         return response()->json([
@@ -121,7 +121,7 @@ class ImageCourseController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'image_course Not Found'
-            ]);
+            ], 404);
         }
 
         $imageCourse->delete();

@@ -25,12 +25,12 @@ class LessonController extends Controller
 
     public function show($id)
     {
-        $lesson = Chapter::find($id);
+        $lesson = Lesson::find($id);
         if (!$lesson) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'lesson Not Found'
-            ]);
+            ], 404);
         }
 
         return response()->json([
@@ -123,7 +123,7 @@ class LessonController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'lesson Not Found'
-            ]);
+            ], 404);
         }
 
         $lesson->delete();

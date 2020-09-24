@@ -43,7 +43,7 @@ class CourseController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'course Not Found'
-            ]);
+            ], 404);
         }
 
         $reviews = Review::where('course_id','=',$id)->get()->toArray();
@@ -171,7 +171,7 @@ class CourseController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Course Not Found'
-            ]);
+            ], 404);
         }
 
         $course->delete();

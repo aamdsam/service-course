@@ -30,7 +30,7 @@ class ChapterController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'chapters Not Found'
-            ]);
+            ], 404);
         }
 
         return response()->json([
@@ -121,7 +121,7 @@ class ChapterController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'chapter Not Found'
-            ]);
+            ], 404);
         }
 
         $chapter->delete();
